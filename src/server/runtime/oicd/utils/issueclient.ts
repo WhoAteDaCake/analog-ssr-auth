@@ -1,9 +1,10 @@
 import { Issuer } from 'openid-client'
 import { OidcProvider } from '../types';
 import { logger } from './logger'
+import {useOicdRuntimeConfig} from "../context";
 
 export const initClient = async (op: OidcProvider, req: any, redirectUris: string[]) => {
-  const { config } = useRuntimeConfig().openidConnect
+  const { config } = useOicdRuntimeConfig()
   const issuer = await Issuer.discover(op.issuer)
   logger.trace('Discovered issuer %s %O', issuer.issuer, issuer.metadata)
   const client = new issuer.Client({
