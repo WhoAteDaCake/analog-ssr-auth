@@ -1,6 +1,7 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+  "extends": "./.nitro/types/tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -28,6 +29,7 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
+  "files": ["nitropack/types.d.ts"],
   "references": [
     { "path": "tsconfig.app.json" },
     { "path": "tsconfig.spec.json" }

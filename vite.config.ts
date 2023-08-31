@@ -2,6 +2,11 @@
 
 import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
+import { resolve } from 'path';
+
+const resolveRuntime = (path: string) => {
+  return resolve(__dirname, './server/runtime/', path)
+}
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -12,13 +17,15 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     mainFields: ['module'],
   },
-  plugins: [analog()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: ['src/test.ts'],
-    include: ['**/*.spec.ts'],
-  },
+  plugins: [analog({
+    nitro: {
+      handlers: [{
+        method: 'get',
+        route: '/login',
+        handler: resolveRuntime('./oidc/routes/login')
+      }]
+    }
+  })],
   define: {
     'import.meta.vitest': mode !== 'production',
   },
