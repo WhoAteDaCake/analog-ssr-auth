@@ -1,10 +1,10 @@
 import { defineEventHandler, setCookie, getCookie } from 'h3'
 import { generators } from 'openid-client'
-import { initClient } from '../utils/issueclient'
-import { logger } from '../utils/logger'
-import { getRedirectUrl, getCallbackUrl, getDefaultBackUrl, getResponseMode } from '../utils/shared'
+import { initClient } from '../../runtime/oidc/utils/issueclient'
+import { logger } from '../../runtime/oidc/utils/logger'
+import { getRedirectUrl, getCallbackUrl, getDefaultBackUrl, getResponseMode } from '../../runtime/oidc/utils/shared'
 import {ModuleOptions} from "../types";
-import {useOicdRuntimeConfig} from "../context";
+import {useOicdRuntimeConfig} from "../../runtime/oidc/context";
 
 export default defineEventHandler(async (event) => {
   logger.info('[Login]: oidc/login calling')

@@ -1,6 +1,6 @@
 import { getCookie, deleteCookie, defineEventHandler } from 'h3'
-import { logger } from '../utils/logger'
-import {useOicdRuntimeConfig} from "../context";
+import { logger } from '../../runtime/oidc/utils/logger'
+import {useOicdRuntimeConfig} from "../../runtime/oidc/context";
 
 export default defineEventHandler((event) => {
   const res = event.node.res

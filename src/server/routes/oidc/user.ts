@@ -1,9 +1,9 @@
 import { getCookie, deleteCookie, defineEventHandler } from 'h3'
-import { initClient } from '../utils/issueclient'
-import { encrypt, decrypt } from '../utils/encrypt'
-import { logger } from '../utils/logger'
-import { setCookieInfo, setCookieTokenAndRefreshToken } from '../utils/shared'
-import {useOicdRuntimeConfig} from "../context";
+import { initClient } from '../../runtime/oidc/utils/issueclient'
+import { encrypt, decrypt } from '../../runtime/oidc/utils/encrypt'
+import { logger } from '../../runtime/oidc/utils/logger'
+import { setCookieInfo, setCookieTokenAndRefreshToken } from '../../runtime/oidc/utils/shared'
+import {useOicdRuntimeConfig} from "../../runtime/oidc/context";
 
 export default defineEventHandler(async (event) => {
   const { config, op } = useOicdRuntimeConfig()

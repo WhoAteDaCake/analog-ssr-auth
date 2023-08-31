@@ -1,7 +1,7 @@
 import { defineEventHandler, setCookie, getCookie } from 'h3'
-import { logger } from '../utils/logger'
-import { CBT_PAGE_TEMPATE } from '../utils/template'
-import {useOicdRuntimeConfig} from "../context";
+import { logger } from '../../runtime/oidc/utils/logger'
+import { CBT_PAGE_TEMPATE } from '../../runtime/oidc/utils/template'
+import {useOicdRuntimeConfig} from "../../runtime/oidc/context";
 
 
 export default defineEventHandler((event) => {

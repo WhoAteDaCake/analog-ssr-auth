@@ -2,14 +2,14 @@
 
 import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
-import { resolve } from 'path';
+import { join } from 'path';
 
 const resolveRuntime = (path: string) => {
-  return resolve(__dirname, './server/runtime/', path)
+  return join('./src/server/runtime/', path)
 }
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  root: '.',
   publicDir: 'src/assets',
   build: {
     target: ['es2020'],
@@ -18,24 +18,69 @@ export default defineConfig(({ mode }) => ({
     mainFields: ['module'],
   },
   plugins: [analog({
+    ssr: true,
     nitro: {
-      handlers: [{
-        method: 'get',
-        route: '/login',
-        handler: resolveRuntime('./oidc/routes/login')
-      }],
+      // externals: {
+      //   inline: ['./src/server/runtime']
+      // },
+      // handlers: [
+      //   {
+      //     method: 'get',
+      //     route: '/api/oidc/status',
+      //     handler: resolveRuntime('./oidc/routes/status')
+      //   },
+      //   {
+      //     method: 'get',
+      //     route: '/api/oidc/login',
+      //     handler: resolveRuntime('./oidc/routes/login')
+      //   },
+      //   {
+      //     method: 'get',
+      //     route: '/api/oidc/logout',
+      //     handler: resolveRuntime('./oidc/routes/logout')
+      //   },
+      //   {
+      //     method: 'get',
+      //     route: '/api/oidc/callback',
+      //     handler: resolveRuntime('./oidc/routes/callback')
+      //   },
+      //   {
+      //     method: 'post',
+      //     route: '/api/oidc/callback',
+      //     handler: resolveRuntime('./oidc/routes/callback')
+      //   },
+      //   {
+      //     method: 'get',
+      //     route: '/api/oidc/user',
+      //     handler: resolveRuntime('./oidc/routes/user')
+      //   },
+      //   {
+      //     method: 'get',
+      //     route: '/api/oidc/cbt',
+      //     handler: resolveRuntime('./oidc/routes/cbt')
+      //   },
+      //   {
+      //     method: 'post',
+      //     route: '/api/oidc/cbt',
+      //     handler: resolveRuntime('./oidc/routes/cbt')
+      //   },
+      //   {
+      //     method: 'get',
+      //     route: '/api/oidc/error',
+      //     handler: resolveRuntime('./oidc/routes/error')
+      //   }
+      // ],
       runtimeConfig: {
         openidConnect: {
           addPlugin: true,
           op: {
-            issuer: 'http://192.168.26.114:8080/realms/test', // change to your OP addrress
-            clientId: 'testClient',
-            clientSecret: 'cnuLA78epx8s8vMbRxcaiXbzlS4u8bSA',
-            callbackUrl: 'http://192.168.26.114:3000/oidc/callback', // optional
+            issuer: process.env.AUTH_DOMAIN, // change to your OP addrress
+            clientId: process.env.AUTH_CLIENT_ID,
+            clientSecret: process.env.AUTH_CLIENT_SECRET,
+            callbackUrl: `${process.env.BASE_URL}/api/oidc/callback`, // optional
             scope: [
               'email',
-              'profile',
-              'address'
+              'profile'
             ]
           },
           config: {

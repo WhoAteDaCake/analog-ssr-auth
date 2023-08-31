@@ -1,10 +1,9 @@
 import * as http from 'http'
 import { defineEventHandler, getCookie, setCookie, deleteCookie } from 'h3'
-import { initClient } from '../utils/issueclient'
-import { encrypt } from '../utils/encrypt'
-import { logger } from '../utils/logger'
-import { getRedirectUrl, getCallbackUrl, getDefaultBackUrl, getResponseMode, setCookieInfo, setCookieTokenAndRefreshToken } from '../utils/shared'
-import {useOicdRuntimeConfig} from "../context";
+import { initClient } from '../../runtime/oidc/utils/issueclient'
+import { logger } from '../../runtime/oidc/utils/logger'
+import { getRedirectUrl, getCallbackUrl, getDefaultBackUrl, getResponseMode, setCookieInfo, setCookieTokenAndRefreshToken } from '../../runtime/oidc/utils/shared'
+import {useOicdRuntimeConfig} from "../../runtime/oidc/context";
 
 export default defineEventHandler(async (event) => {
   const req = event.node.req
