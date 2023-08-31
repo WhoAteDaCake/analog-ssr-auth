@@ -77,7 +77,7 @@ export default defineConfig(({ mode }) => ({
             issuer: process.env.AUTH_DOMAIN, // change to your OP addrress
             clientId: process.env.AUTH_CLIENT_ID,
             clientSecret: process.env.AUTH_CLIENT_SECRET,
-            callbackUrl: `${process.env.BASE_URL}/api/oidc/callback`, // optional
+            callbackUrl: `${process.env.VITE_ANALOG_PUBLIC_BASE_URL}/api/oidc/callback`, // optional
             scope: [
               'email',
               'profile'

@@ -8,6 +8,9 @@ import { Component } from '@angular/core';
       <a href="/api/oidc/login">
         Login
       </a>
+      <a href="/protected">
+        Protected
+      </a>
     </div>
 
   `,
